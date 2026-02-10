@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Hero from './components/Hero';
-import ProjectCard from './components/ProjectCard';
 import ContactForm from './components/ContactForm';
+import { CardStack } from './components/ui/CardStack';
 import Skills from './components/Skills';
 import SocialSidebar from './components/SocialSidebar';
 import {
@@ -18,30 +18,37 @@ function App() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  // Enhanced Projects Data for Card Stack
   const projects = [
     {
-      title: "Institutional Digitization System",
-      category: "Development",
-      description: "Secure transformation framework for UNN ICT Unit. Migrated 10,000+ analog records to centralized SQL, boosting retrieval speed by 85%.",
-      tags: ["Full-Stack", "SQL", "Architecture"],
-      gradient: "from-blue-600 to-indigo-600",
-      link: "#"
+      id: 1,
+      title: "Orderly",
+      category: "SaaS Product",
+      description: "Combat chaos with our next-gen queue system. Manage crowds efficiently and avoid the drama. 78k+ Active Users.",
+      tags: ["React", "Queue System", "UX/UI"],
+      gradient: "from-lime-400 to-green-600",
+      imageSrc: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2670&auto=format&fit=crop", // Dark Dashboard/Tech
+      link: "https://orderly-xi-gold.vercel.app/"
     },
     {
-      title: "Cisco Academy Infrastructure",
-      category: "Network Engineering",
-      description: "Deployed enterprise-grade network infrastructure. Orchestrated training modules resulting in a 40% rise in certification pass rates.",
-      tags: ["Cisco", "Networking", "Design"],
-      gradient: "from-emerald-500 to-teal-600",
-      link: "#"
+      id: 2,
+      title: "KingsOnly",
+      category: "E-Commerce",
+      description: "Street Wear: Define your altitude. A premium fashion platform for those who replace the standard.",
+      tags: ["Shopify", "Fashion", "Branding"],
+      gradient: "from-orange-500 to-amber-600",
+      imageSrc: "https://images.unsplash.com/photo-1523398002811-999ca8dec234?q=80&w=2600&auto=format&fit=crop", // Streetwear/Fashion
+      link: "https://kingsonly.vercel.app/"
     },
     {
-      title: "Acesped IT Automation",
-      category: "IT Operations",
-      description: "Custom software modules for workflow automation. Delivered 24/7 technical support, maintaining 99.9% system uptime.",
-      tags: ["Automation", "Support", "DevOps"],
-      gradient: "from-orange-500 to-pink-600",
-      link: "#"
+      id: 3,
+      title: "Pentecost Bank",
+      category: "Fintech Solution",
+      description: "A modern banking interface for digital finance management. Secure, fast, and user-centric banking experience.",
+      tags: ["Next.js", "Finance", "Security"],
+      gradient: "from-blue-600 to-cyan-500",
+      imageSrc: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2670&auto=format&fit=crop", // Banking/Finance
+      link: "https://pentecost-bank.vercel.app/"
     }
   ];
 
@@ -172,12 +179,14 @@ function App() {
               <h2 className="text-4xl md:text-6xl font-black text-white tracking-tight">Featured <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Projects.</span></h2>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-8">
-              {projects.map((proj, i) => (
-                <div key={i} className="h-[450px]">
-                  <ProjectCard {...proj} />
-                </div>
-              ))}
+            <div className="flex justify-center w-full">
+              <CardStack
+                items={projects}
+                cardWidth={500}
+                cardHeight={400}
+                autoAdvance={true}
+                intervalMs={5000}
+              />
             </div>
           </div>
         </section>

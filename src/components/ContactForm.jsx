@@ -17,9 +17,9 @@ const ContactForm = () => {
   // 2. Template ID: Created in "Email Templates" tab (use variables {{user_name}}, {{user_email}}, {{message}})
   // 3. Public Key: Found in "Account" -> "API Keys"
   // ---------------------------------------------------------
-  const SERVICE_ID = "YOUR_SERVICE_ID";
-  const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-  const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
+  const SERVICE_ID = "service_mn6ymsb";
+  const TEMPLATE_ID = "template_4se3hrt";
+  const PUBLIC_KEY = "2lTHvw_HQcvzUTu3R";
 
   const handleSubmit = (e) => {
     e.preventDefault();

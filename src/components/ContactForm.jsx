@@ -1,36 +1,66 @@
 import React, { useState, useRef } from 'react';
-import { Send, CheckCircle, Mail, User, MessageSquare, ArrowRight, Sparkles } from 'lucide-react';
+import { Send, CheckCircle, Mail, User, MessageSquare, Sparkles, Loader2 } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 
 const ContactForm = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const form = useRef();
+
+  // ---------------------------------------------------------
+  // 📧 EmailJS Configuration
+  // ---------------------------------------------------------
+  // You need to create an account at https://www.emailjs.com/
+  // and replace these placeholders with your actual IDs.
+  // 1. Service ID: Created in "Email Services" tab
+  // 2. Template ID: Created in "Email Templates" tab (use variables {{user_name}}, {{user_email}}, {{message}})
+  // 3. Public Key: Found in "Account" -> "API Keys"
+  // ---------------------------------------------------------
+  const SERVICE_ID = "YOUR_SERVICE_ID";
+  const TEMPLATE_ID = "YOUR_TEMPLATE_ID";
+  const PUBLIC_KEY = "YOUR_PUBLIC_KEY";
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setIsSubmitted(true);
-    }, 1500);
+    setError(null);
+
+    // Using EmailJS to send the form
+    emailjs.sendForm(SERVICE_ID, TEMPLATE_ID, form.current, PUBLIC_KEY)
+      .then((result) => {
+        console.log('SUCCESS!', result.text);
+        setLoading(false);
+        setIsSubmitted(true);
+      }, (error) => {
+        console.log('FAILED...', error.text);
+        setLoading(false);
+        // For demo purposes, we'll confirm submission even if it fails due to invalid keys, 
+        // but show an alert so the developer knows.
+        if (error.text.includes("The user_id parameter is required")) {
+          alert("EmailJS is not configured yet! Please add your Service ID, Template ID, and Public Key in ContactForm.jsx");
+        } else {
+          setError("Failed to send message. Please try again later.");
+        }
+      });
   };
 
   if (isSubmitted) {
     return (
-      <section className="py-24 bg-slate-900 flex justify-center items-center px-6">
-        <div className="max-w-xl w-full bg-white p-12 rounded-[3rem] shadow-[0_20px_50px_rgba(0,0,0,0.3)] text-center animate-in zoom-in">
-          <div className="w-20 h-20 bg-green-500 text-white rounded-full flex items-center justify-center mx-auto mb-8 shadow-lg shadow-green-200">
-            <CheckCircle size={40} />
+      <section className="py-24 flex justify-center items-center px-6">
+        <div className="max-w-md w-full glass-panel p-12 rounded-[2rem] text-center animate-pulse-glow border border-green-500/20 bg-green-900/10">
+          <div className="w-16 h-16 bg-green-500/20 text-green-400 rounded-full flex items-center justify-center mx-auto mb-6 border border-green-500/30">
+            <CheckCircle size={32} />
           </div>
-          <h2 className="text-3xl font-black text-slate-900 mb-4">Message Received!</h2>
-          <p className="text-slate-600 mb-8 leading-relaxed">
-            Thanks for reaching out, Ndefo. I'll get back to you within 24 hours.
+          <h2 className="text-2xl font-bold text-white mb-2">Message Received!</h2>
+          <p className="text-slate-400 mb-8 text-sm leading-relaxed">
+            Thanks for reaching out. I'll get back to you shortly.
           </p>
-          <button 
+          <button
             onClick={() => setIsSubmitted(false)}
-            className="bg-slate-900 text-white px-8 py-3 rounded-xl font-bold hover:bg-blue-600 transition-all flex items-center gap-2 mx-auto"
+            className="w-full bg-white/5 border border-white/10 text-white py-3 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-white/10 transition-all"
           >
-            Send Another <ArrowRight size={18} />
+            Send Another
           </button>
         </div>
       </section>
@@ -38,89 +68,104 @@ const ContactForm = () => {
   }
 
   return (
-    <section id="contact" className="py-24 bg-slate-900 relative overflow-hidden">
-      {/* Background Accents for Depth */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-        <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-500 rounded-full blur-[120px]"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-500 rounded-full blur-[120px]"></div>
-      </div>
+    <section id="contact" className="py-24 relative overflow-hidden">
 
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="grid lg:grid-cols-5 gap-16 items-center">
-          
-          {/* Left Side: Content */}
-          <div className="lg:col-span-2 text-white">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-500/20 text-blue-400 text-xs font-bold uppercase tracking-widest mb-6">
-              <Sparkles size={14} /> Available for Projects
-            </div>
-            <h2 className="text-5xl font-black mb-6 tracking-tight">Ready to start a <span className="text-blue-500">new project?</span></h2>
-            <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-              Whether you're looking for institutional digitization, network infrastructure, or custom software—I'm ready to help.
-            </p>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4 text-slate-300">
-                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-blue-400"><Mail size={20}/></div>
-                <span>agozilim.ndefo@gmail.com</span>
-              </div>
-            </div>
+      {/* Background Glows */}
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-[150px] -z-10 pointer-events-none"></div>
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-600/10 rounded-full blur-[150px] -z-10 pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 text-slate-300 font-mono text-[10px] uppercase tracking-widest mb-4">
+            <Sparkles size={12} className="text-yellow-400" /> Open for Opportunities
           </div>
-
-          {/* Right Side: Solid Form */}
-          <div className="lg:col-span-3">
-            <div className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.3)] border border-white/20">
-              <form ref={form} onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-slate-900 font-bold text-sm mb-3">Full Name</label>
-                    <div className="relative">
-                      <User className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-                      <input 
-                        type="text" 
-                        required
-                        className="w-full bg-slate-50 border-2 border-slate-100 focus:border-blue-600 focus:bg-white rounded-2xl pl-12 pr-6 py-4 outline-none transition-all text-slate-900"
-                        placeholder="Ndefo Agozilim"
-                      />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-slate-900 font-bold text-sm mb-3">Email Address</label>
-                    <div className="relative">
-                      <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
-                      <input 
-                        type="email" 
-                        required
-                        className="w-full bg-slate-50 border-2 border-slate-100 focus:border-blue-600 focus:bg-white rounded-2xl pl-12 pr-6 py-4 outline-none transition-all text-slate-900"
-                        placeholder="ndefo@example.com"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-slate-900 font-bold text-sm mb-3">Message</label>
-                  <div className="relative">
-                    <MessageSquare className="absolute left-4 top-5 text-slate-400" size={18} />
-                    <textarea 
-                      rows="4"
-                      required
-                      className="w-full bg-slate-50 border-2 border-slate-100 focus:border-blue-600 focus:bg-white rounded-2xl pl-12 pr-6 py-4 outline-none transition-all text-slate-900 resize-none"
-                      placeholder="How can I help you today?"
-                    ></textarea>
-                  </div>
-                </div>
-
-                <button 
-                  type="submit"
-                  disabled={loading}
-                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-5 rounded-2xl font-black uppercase tracking-widest transition-all shadow-xl shadow-blue-500/20 flex items-center justify-center gap-3 active:scale-95"
-                >
-                  {loading ? <div className="w-6 h-6 border-4 border-white/30 border-t-white rounded-full animate-spin"></div> : <>Send Message <Send size={18} /></>}
-                </button>
-              </form>
-            </div>
-          </div>
-
+          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">Let's build something <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">extraordinary.</span></h2>
+          <p className="text-slate-400 max-w-xl mx-auto text-lg">
+            Whether you need a full-stack application, network architecture, or digital strategy.
+          </p>
         </div>
+
+        <div className="grid md:grid-cols-12 gap-12">
+
+          {/* Contact Info */}
+          <div className="md:col-span-5 space-y-8">
+            <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-colors group">
+              <Mail className="text-blue-500 mb-4 group-hover:scale-110 transition-transform" size={28} />
+              <h3 className="text-xl font-bold text-white mb-1">Email Me</h3>
+              <a href="mailto:agozilim.ndefo@gmail.com" className="text-slate-400 hover:text-white transition-colors text-sm break-all">agozilim.ndefo@gmail.com</a>
+            </div>
+
+            <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5 hover:border-indigo-500/30 transition-colors group">
+              <User className="text-indigo-500 mb-4 group-hover:scale-110 transition-transform" size={28} />
+              <h3 className="text-xl font-bold text-white mb-1">Socials</h3>
+              <p className="text-slate-400 text-sm">Find me on LinkedIn & Twitter/X.</p>
+            </div>
+          </div>
+
+          {/* Form */}
+          <div className="md:col-span-7">
+            <form ref={form} onSubmit={handleSubmit} className="space-y-6 bg-white/[0.02] p-8 md:p-10 rounded-[2.5rem] border border-white/5 shadow-2xl backdrop-blur-sm">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-4">Name</label>
+                  <input
+                    type="text"
+                    name="user_name"
+                    required
+                    className="w-full bg-black/20 border border-white/10 focus:border-blue-500 hover:border-white/20 rounded-2xl px-6 py-4 text-white outline-none transition-all placeholder:text-slate-600"
+                    placeholder="John Doe"
+                    disabled={loading}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-4">Email</label>
+                  <input
+                    type="email"
+                    name="user_email"
+                    required
+                    className="w-full bg-black/20 border border-white/10 focus:border-blue-500 hover:border-white/20 rounded-2xl px-6 py-4 text-white outline-none transition-all placeholder:text-slate-600"
+                    placeholder="john@example.com"
+                    disabled={loading}
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-xs font-bold uppercase tracking-widest text-slate-500 ml-4">Message</label>
+                <textarea
+                  name="message"
+                  rows="4"
+                  required
+                  className="w-full bg-black/20 border border-white/10 focus:border-blue-500 hover:border-white/20 rounded-2xl px-6 py-4 text-white outline-none transition-all resize-none placeholder:text-slate-600"
+                  placeholder="Tell me about your project..."
+                  disabled={loading}
+                ></textarea>
+              </div>
+
+              {error && (
+                <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl text-red-400 text-sm text-center">
+                  {error}
+                </div>
+              )}
+
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full bg-blue-600 hover:bg-blue-500 text-white py-4 rounded-2xl font-black uppercase tracking-widest text-xs transition-all shadow-lg shadow-blue-600/20 flex items-center justify-center gap-3 group disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <div className="flex items-center gap-2">
+                    <Loader2 className="animate-spin" size={16} />
+                    Sending...
+                  </div>
+                ) : (
+                  <>Send Message <Send size={14} className="group-hover:translate-x-1 transition-transform" /></>
+                )}
+              </button>
+            </form>
+          </div>
+        </div>
+
       </div>
     </section>
   );

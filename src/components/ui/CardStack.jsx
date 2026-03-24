@@ -164,10 +164,10 @@ export function CardStack({
     return (
         <div className={cn("w-full relative", className)}>
 
-            {/* --- MOBILE VIEW: Horizontal Scroll --- */}
-            <div className="md:hidden w-full flex overflow-x-auto snap-x snap-mandatory px-6 gap-4 pb-8 scrollbar-hide">
+            {/* --- MOBILE VIEW: Vertical List --- */}
+            <div className="md:hidden w-full flex flex-col items-center px-6 gap-8 pb-12">
                 {items.map((item) => (
-                    <div key={item.id} className="snap-center shrink-0 w-[85vw] max-w-sm h-[400px] rounded-3xl overflow-hidden border border-white/10 bg-[#0b1120] relative">
+                    <div key={item.id} className="w-full max-w-sm h-[420px] rounded-3xl overflow-hidden border border-white/10 bg-[#0b1120] relative shadow-xl">
                         <div className="absolute inset-0">
                             {item.imageSrc ? (
                                 <img src={item.imageSrc} alt={item.title} className="h-full w-full object-cover" />

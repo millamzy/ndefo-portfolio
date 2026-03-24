@@ -81,10 +81,10 @@ const Hero = () => {
         </div>
 
         {/* Right: Profile Visual Stack & Terminal */}
-        <div className="relative hidden lg:flex items-center justify-center h-[600px]">
+        <div className="relative flex items-center justify-center h-[400px] lg:h-[600px] mt-12 lg:mt-0">
 
           {/* Main Image Container */}
-          <div className="relative w-80 h-[450px] rounded-[3rem] p-2 bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-white/10 backdrop-blur-sm z-10 transform rotate-[-2deg] hover:rotate-0 transition-all duration-500 mr-20">
+          <div className="relative w-72 h-[380px] lg:w-80 lg:h-[450px] rounded-[3rem] p-2 bg-gradient-to-br from-blue-500/20 to-purple-500/20 border border-white/10 backdrop-blur-sm z-10 transform rotate-[-2deg] hover:rotate-0 transition-all duration-500 lg:mr-20">
             <div className="w-full h-full rounded-[2.5rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 relative">
               <div className="absolute inset-0 bg-blue-900/20 mix-blend-overlay"></div>
               <img src={profileImg} alt="Ndefo Profile" className="w-full h-full object-cover" />
@@ -92,7 +92,7 @@ const Hero = () => {
           </div>
 
           {/* Floating 'Stats' Card 1 */}
-          <div className="absolute top-20 right-0 w-48 bg-[#0b1120]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl z-20 animate-float">
+          <div className="absolute top-20 right-0 w-48 bg-[#0b1120]/90 backdrop-blur-xl border border-white/10 rounded-2xl p-4 shadow-2xl z-20 animate-float hidden lg:block">
             <div className="flex items-center gap-3 mb-2">
               <div className="p-2 rounded-lg bg-blue-500/20 text-blue-400"><Code2 size={16} /></div>
               <span className="text-white font-bold text-xs">Developer</span>
@@ -103,7 +103,7 @@ const Hero = () => {
           </div>
 
           {/* --- TERMINAL CARD (Re-inserted) --- */}
-          <div className="absolute bottom-20 -right-10 w-[280px] bg-[#0b1120]/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 shadow-2xl z-30 animate-float" style={{ animationDelay: '1.5s' }}>
+          <div className="absolute bottom-20 -right-10 w-[280px] bg-[#0b1120]/95 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 shadow-2xl z-30 animate-float hidden lg:block" style={{ animationDelay: '1.5s' }}>
             <div className="flex gap-1.5 mb-5">
               <div className="w-2.5 h-2.5 rounded-full bg-red-500/50"></div>
               <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50"></div>

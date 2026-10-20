@@ -167,34 +167,34 @@ export function CardStack({
             {/* --- MOBILE VIEW: Vertical List --- */}
             <div className="md:hidden w-full flex flex-col items-center px-6 gap-8 pb-12">
                 {items.map((item) => (
-                    <div key={item.id} className="w-full max-w-sm h-[420px] rounded-3xl overflow-hidden border border-white/10 bg-[#0b1120] relative shadow-xl">
+                    <div key={item.id} className="w-full max-w-sm h-[420px] rounded-3xl overflow-hidden border border-emerald-500/20 bg-[#0a1e16] relative shadow-xl">
                         <div className="absolute inset-0">
                             {item.imageSrc ? (
                                 <img src={item.imageSrc} alt={item.title} className="h-full w-full object-cover" />
                             ) : (
-                                <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${item.gradient || 'from-slate-800 to-slate-900'}`}>
+                                <div className={`flex h-full w-full items-center justify-center bg-gradient-to-br ${item.gradient || 'from-emerald-950 to-slate-900'}`}>
                                     <span className="text-slate-500 text-sm">No Image</span>
                                 </div>
                             )}
                         </div>
-                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/50 to-transparent opacity-90" />
+                        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#071611] via-[#071611]/60 to-transparent opacity-95" />
 
                         <div className="relative z-10 flex h-full flex-col justify-end p-6">
                             <div className="flex flex-wrap items-center gap-2 mb-2">
                                 {(item.category || item.tag) && (
-                                    <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full w-fit">
+                                    <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#bbf443] bg-[#123829] border border-[#bbf443]/30 rounded-full w-fit">
                                         {item.category || item.tag}
                                     </span>
                                 )}
                                 {Array.isArray(item.tags) && item.tags.map((tag, idx) => (
-                                    <span key={idx} className="inline-block px-2 py-0.5 text-[9px] font-mono font-medium text-slate-400 bg-white/5 border border-white/10 rounded-full">
+                                    <span key={idx} className="inline-block px-2.5 py-0.5 text-[9px] font-mono font-medium text-emerald-200 bg-[#0e2d21] border border-emerald-500/20 rounded-full">
                                         #{tag}
                                     </span>
                                 ))}
                             </div>
                             <h3 className="text-xl font-black text-white mb-2 leading-tight">{item.title}</h3>
                             {item.description && (
-                                <p className="line-clamp-3 text-sm text-slate-300 font-medium leading-relaxed max-w-[95%]">
+                                <p className="line-clamp-3 text-sm text-emerald-100/80 font-medium leading-relaxed max-w-[95%]">
                                     {item.description}
                                 </p>
                             )}
@@ -203,7 +203,7 @@ export function CardStack({
                                     href={item.link}
                                     target="_blank"
                                     rel="noreferrer"
-                                    className="mt-4 px-6 py-2 bg-white text-slate-900 text-xs font-bold uppercase tracking-widest rounded-full hover:bg-blue-500 hover:text-white transition-all w-fit flex items-center gap-2"
+                                    className="mt-4 px-6 py-2.5 bg-[#bbf443] hover:bg-[#cbfd50] text-[#071611] text-xs font-black uppercase tracking-wider rounded-full transition-all w-fit flex items-center gap-2 shadow-lg shadow-[#bbf443]/20"
                                 >
                                     Visit Site <SquareArrowOutUpRight size={12} />
                                 </a>
@@ -230,7 +230,7 @@ export function CardStack({
                     onKeyDown={onKeyDown}
                 >
                     {/* Glow Effects - Background */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[100px] pointer-events-none" />
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#bbf443]/10 rounded-full blur-[120px] pointer-events-none" />
 
                     <div className="relative w-full max-w-4xl flex justify-center items-center h-full">
                         <AnimatePresence initial={false}>
@@ -277,7 +277,7 @@ export function CardStack({
                                         key={item.id}
                                         className={cn(
                                             "absolute transition-shadow duration-300",
-                                            isActive ? "z-50 cursor-grab active:cursor-grabbing shadow-2xl shadow-blue-500/20" : "cursor-pointer opacity-80 hover:opacity-100"
+                                            isActive ? "z-50 cursor-grab active:cursor-grabbing shadow-2xl shadow-[#bbf443]/20" : "cursor-pointer opacity-80 hover:opacity-100"
                                         )}
                                         style={{
                                             width: '100%',
@@ -316,7 +316,7 @@ export function CardStack({
                                         {...dragProps}
                                     >
                                         {/* Render Content */}
-                                        <div className="w-full h-full relative rounded-3xl overflow-hidden border border-white/10 bg-[#0b1120] backdrop-blur-xl">
+                                        <div className="w-full h-full relative rounded-3xl overflow-hidden border border-emerald-500/20 bg-[#091f16] backdrop-blur-xl">
                                             {renderCard ? (
                                                 renderCard(item, { active: isActive })
                                             ) : (
@@ -335,14 +335,14 @@ export function CardStack({
                     <div className="mt-8 flex items-center justify-center gap-3 relative z-30">
                         <button
                             onClick={prev}
-                            className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-blue-600/30 hover:border-blue-500/30 transition-all active:scale-95"
+                            className="p-2.5 rounded-full bg-[#0c251c] border border-emerald-500/20 text-emerald-300 hover:text-[#bbf443] hover:bg-[#123829] hover:border-[#bbf443]/40 transition-all active:scale-95"
                             aria-label="Previous project"
                             title="Previous project"
                         >
                             <ChevronLeft size={16} />
                         </button>
 
-                        <div className="flex items-center gap-2 p-2 rounded-full bg-white/5 border border-white/5 backdrop-blur-md">
+                        <div className="flex items-center gap-2 px-3 py-2 rounded-full bg-[#0c251c]/90 border border-emerald-500/20 backdrop-blur-md">
                             {items.map((it, idx) => {
                                 const on = idx === active;
                                 return (
@@ -351,7 +351,7 @@ export function CardStack({
                                         onClick={() => setActive(idx)}
                                         className={cn(
                                             "h-2 w-2 rounded-full transition-all duration-300",
-                                            on ? "bg-blue-500 w-6" : "bg-slate-600 hover:bg-slate-400"
+                                            on ? "bg-[#bbf443] w-6 shadow-[0_0_10px_#bbf443]" : "bg-emerald-800/80 hover:bg-emerald-600"
                                         )}
                                         aria-label={`Go to ${it.title}`}
                                     />
@@ -364,7 +364,7 @@ export function CardStack({
                                 href={activeItem.link || activeItem.href}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="p-2 rounded-full bg-white/5 text-slate-400 hover:bg-blue-600 hover:text-white transition-all border border-white/5"
+                                className="p-2.5 rounded-full bg-[#0c251c] text-emerald-300 hover:bg-[#bbf443] hover:text-[#071611] transition-all border border-emerald-500/20 shadow-md"
                                 aria-label="Open link"
                                 title="Visit live site"
                             >
@@ -374,7 +374,7 @@ export function CardStack({
 
                         <button
                             onClick={next}
-                            className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-blue-600/30 hover:border-blue-500/30 transition-all active:scale-95"
+                            className="p-2.5 rounded-full bg-[#0c251c] border border-emerald-500/20 text-emerald-300 hover:text-[#bbf443] hover:bg-[#123829] hover:border-[#bbf443]/40 transition-all active:scale-95"
                             aria-label="Next project"
                             title="Next project"
                         >
@@ -407,18 +407,18 @@ function DefaultFanCard({ item, active }) {
             </div>
 
             {/* Gradient Overlay */}
-            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/40 to-transparent opacity-90" />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#071611] via-[#071611]/50 to-transparent opacity-95" />
 
             {/* Content */}
             <div className="relative z-10 flex h-full flex-col justify-end p-8">
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                     {(item.category || item.tag) && (
-                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full w-fit">
+                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-[#bbf443] bg-[#123829] border border-[#bbf443]/30 rounded-full w-fit">
                             {item.category || item.tag}
                         </span>
                     )}
                     {Array.isArray(item.tags) && item.tags.map((tag, idx) => (
-                        <span key={idx} className="inline-block px-2.5 py-0.5 text-[9px] font-mono font-medium text-slate-400 bg-white/5 border border-white/10 rounded-full">
+                        <span key={idx} className="inline-block px-2.5 py-0.5 text-[9px] font-mono font-medium text-emerald-200 bg-[#0e2d21] border border-emerald-500/20 rounded-full">
                             #{tag}
                         </span>
                     ))}
@@ -427,7 +427,7 @@ function DefaultFanCard({ item, active }) {
                     {item.title}
                 </h3>
                 {item.description && (
-                    <p className="line-clamp-3 text-sm text-slate-300 font-medium leading-relaxed max-w-[90%]">
+                    <p className="line-clamp-3 text-sm text-emerald-100/80 font-medium leading-relaxed max-w-[90%]">
                         {item.description}
                     </p>
                 )}
@@ -438,7 +438,7 @@ function DefaultFanCard({ item, active }) {
                         target="_blank"
                         rel="noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="mt-4 px-6 py-2 bg-white text-slate-900 text-xs font-bold uppercase tracking-widest rounded-full hover:bg-blue-500 hover:text-white transition-all w-fit flex items-center gap-2 shadow-lg shadow-white/10"
+                        className="mt-4 px-6 py-2.5 bg-[#bbf443] hover:bg-[#cbfd50] text-[#071611] text-xs font-black uppercase tracking-wider rounded-full transition-all w-fit flex items-center gap-2 shadow-lg shadow-[#bbf443]/20"
                     >
                         Visit Site <SquareArrowOutUpRight size={12} />
                     </a>
@@ -447,7 +447,7 @@ function DefaultFanCard({ item, active }) {
 
             {/* Active Indicator Strip */}
             {active && (
-                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-indigo-500"></div>
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-[#bbf443] to-emerald-400"></div>
             )}
         </div>
     );

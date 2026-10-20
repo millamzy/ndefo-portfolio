@@ -3,98 +3,112 @@
 @tailwind utilities;
 
 /* 
-  PREMIUM GLOBAL RESET & THEME 
-  Theme: "Midnight Glass"
+  FOREST OBSIDIAN & ELECTRIC LIME DESIGN SYSTEM
+  Inspired by premium dark-mode studio aesthetics
 */
 
 :root {
   scroll-behavior: smooth;
-  --bg-primary: #030712; /* gray-950 */
-  --accent-glow: #4f46e5; /* indigo-600 */
+  --bg-primary: #071611;
+  --bg-surface: #0b2118;
+  --accent-lime: #bbf443;
+  --accent-lime-bright: #cbfd50;
+  --accent-glow: rgba(187, 244, 67, 0.35);
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  font-family: 'Plus Jakarta Sans', 'Inter', system-ui, -apple-system, sans-serif;
   background-color: var(--bg-primary);
-  color: #f8fafc;
+  color: #ecfdf5;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-/* NOISE FILTER OVERLAY */
-.bg-noise {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 50;
-  opacity: 0.03;
-  pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+/* SCRIPT ACCENT FONT */
+.font-script {
+  font-family: 'Caveat', cursive;
 }
 
 /* CUSTOM SCROLLBAR */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 9px;
 }
 ::-webkit-scrollbar-track {
-  background: #0f172a;
+  background: #040d0a;
 }
 ::-webkit-scrollbar-thumb {
-  background: #334155;
-  border-radius: 5px;
-  border: 2px solid #0f172a;
+  background: #14382a;
+  border-radius: 9999px;
+  border: 2px solid #040d0a;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #475569;
+  background: #bbf443;
 }
 
-/* UTILITIES */
-.text-gradient {
-  background: linear-gradient(135deg, #cbd5e1 0%, #ffffff 50%, #94a3b8 100%);
+/* SELECTION */
+::selection {
+  background-color: #bbf443;
+  color: #071611;
+}
+
+/* GLASS PANEL EMERALD */
+.glass-emerald {
+  background: rgba(11, 33, 24, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-emerald:hover {
+  border-color: rgba(187, 244, 67, 0.35);
+  box-shadow: 0 10px 30px -10px rgba(187, 244, 67, 0.15);
+}
+
+/* GLOWING AURA RINGS */
+.halo-ring {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(187, 244, 67, 0.35);
+  box-shadow: 0 0 45px rgba(187, 244, 67, 0.18), inset 0 0 35px rgba(187, 244, 67, 0.1);
+  pointer-events: none;
+}
+
+/* PEDESTAL DISC EFFECT */
+.pedestal-base {
+  background: radial-gradient(ellipse at center, #163d2e 0%, #0d261c 55%, #05140f 100%);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7), 0 0 40px rgba(187, 244, 67, 0.15);
+}
+
+/* TEXT GRADIENTS */
+.text-gradient-lime {
+  background: linear-gradient(135deg, #ffffff 0%, #d9f99d 50%, #bbf443 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-}
-
-.text-gradient-blue {
-  background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.glass-panel {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* ANIMATIONS */
-@keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-20px); }
-  100% { transform: translateY(0px); }
-}
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-@keyframes spin-slow {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-.animate-spin-slow {
-  animation: spin-slow 12s linear infinite;
-}
-
-@keyframes pulse-glow {
-  0%, 100% { opacity: 0.5; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.06);
+  }
 }
 .animate-pulse-glow {
-  animation: pulse-glow 4s ease-in-out infinite;
+  animation: pulseGlow 4s ease-in-out infinite;
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
 }
 
 @keyframes ticker {
@@ -104,7 +118,7 @@ body {
 .animate-ticker {
   display: flex;
   width: max-content;
-  animation: ticker 40s linear infinite;
+  animation: ticker 35s linear infinite;
 }
 .animate-ticker:hover {
   animation-play-state: paused;

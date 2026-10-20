@@ -1,10 +1,10 @@
 import React from 'react';
-import { ArrowRight, Code2, Layers, Cpu, Video, Monitor, Palette, Share2 } from 'lucide-react';
+import { ArrowRight, Code2, Layers, Cpu, Video, Monitor, Palette, Share2, FileDown } from 'lucide-react';
 import profileImg from '../assets/profile.jpg';
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen bg-[#030712] flex items-center pt-32 pb-20 overflow-hidden">
+    <section id="about" className="relative min-h-screen bg-[#030712] flex items-center pt-32 pb-20 overflow-hidden">
 
       {/* Background Gradients */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-[150px] -z-10 animate-pulse-glow"></div>
@@ -73,6 +73,14 @@ const Hero = () => {
             <a href="#projects" className="group relative px-8 py-4 bg-white text-slate-950 font-black uppercase tracking-widest text-xs rounded-full overflow-hidden transition-all hover:pr-12">
               <span className="relative z-10">View Projects</span>
               <ArrowRight className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" />
+            </a>
+            <a
+              href="/Ndefo_Agozilim_CV.pdf"
+              download="Ndefo_Agozilim_CV.pdf"
+              className="px-7 py-4 border border-blue-500/30 bg-blue-500/10 text-blue-400 hover:bg-blue-500 hover:text-white font-black uppercase tracking-widest text-xs rounded-full transition-all flex items-center gap-2 group shadow-lg shadow-blue-500/10"
+            >
+              <FileDown size={14} className="group-hover:-translate-y-0.5 transition-transform" />
+              Download CV
             </a>
             <a href="#contact" className="px-8 py-4 border border-white/10 text-white font-black uppercase tracking-widest text-xs rounded-full hover:bg-white/5 transition-all">
               Contact Me

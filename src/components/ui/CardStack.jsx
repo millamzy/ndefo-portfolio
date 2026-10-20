@@ -1,6 +1,6 @@
 import * as React from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { SquareArrowOutUpRight } from "lucide-react";
+import { SquareArrowOutUpRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Simple utility for merging tailwind classes locally (or you can use clsx/tailwind-merge)
 function cn(...classes) {
@@ -180,11 +180,18 @@ export function CardStack({
                         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#020617] via-[#020617]/50 to-transparent opacity-90" />
 
                         <div className="relative z-10 flex h-full flex-col justify-end p-6">
-                            {item.tag && (
-                                <span className="inline-block px-3 py-1 mb-2 text-[10px] font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full w-fit">
-                                    {item.tag}
-                                </span>
-                            )}
+                            <div className="flex flex-wrap items-center gap-2 mb-2">
+                                {(item.category || item.tag) && (
+                                    <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full w-fit">
+                                        {item.category || item.tag}
+                                    </span>
+                                )}
+                                {Array.isArray(item.tags) && item.tags.map((tag, idx) => (
+                                    <span key={idx} className="inline-block px-2 py-0.5 text-[9px] font-mono font-medium text-slate-400 bg-white/5 border border-white/10 rounded-full">
+                                        #{tag}
+                                    </span>
+                                ))}
+                            </div>
                             <h3 className="text-xl font-black text-white mb-2 leading-tight">{item.title}</h3>
                             {item.description && (
                                 <p className="line-clamp-3 text-sm text-slate-300 font-medium leading-relaxed max-w-[95%]">
@@ -323,9 +330,18 @@ export function CardStack({
                     </div>
                 </div>
 
-                {/* Dots navigation */}
+                {/* Navigation controls */}
                 {showDots && (
                     <div className="mt-8 flex items-center justify-center gap-3 relative z-30">
+                        <button
+                            onClick={prev}
+                            className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-blue-600/30 hover:border-blue-500/30 transition-all active:scale-95"
+                            aria-label="Previous project"
+                            title="Previous project"
+                        >
+                            <ChevronLeft size={16} />
+                        </button>
+
                         <div className="flex items-center gap-2 p-2 rounded-full bg-white/5 border border-white/5 backdrop-blur-md">
                             {items.map((it, idx) => {
                                 const on = idx === active;
@@ -342,17 +358,28 @@ export function CardStack({
                                 );
                             })}
                         </div>
-                        {activeItem.href && activeItem.href !== "#" && (
+
+                        {(activeItem.link || activeItem.href) && (activeItem.link || activeItem.href) !== "#" && (
                             <a
-                                href={activeItem.href}
+                                href={activeItem.link || activeItem.href}
                                 target="_blank"
                                 rel="noreferrer"
                                 className="p-2 rounded-full bg-white/5 text-slate-400 hover:bg-blue-600 hover:text-white transition-all border border-white/5"
                                 aria-label="Open link"
+                                title="Visit live site"
                             >
                                 <SquareArrowOutUpRight className="h-4 w-4" />
                             </a>
                         )}
+
+                        <button
+                            onClick={next}
+                            className="p-2 rounded-full bg-white/5 border border-white/10 text-slate-400 hover:text-white hover:bg-blue-600/30 hover:border-blue-500/30 transition-all active:scale-95"
+                            aria-label="Next project"
+                            title="Next project"
+                        >
+                            <ChevronRight size={16} />
+                        </button>
                     </div>
                 )}
             </div>
@@ -384,11 +411,18 @@ function DefaultFanCard({ item, active }) {
 
             {/* Content */}
             <div className="relative z-10 flex h-full flex-col justify-end p-8">
-                {item.tag && (
-                    <span className="inline-block px-3 py-1 mb-3 text-[10px] font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full w-fit">
-                        {item.tag}
-                    </span>
-                )}
+                <div className="flex flex-wrap items-center gap-2 mb-3">
+                    {(item.category || item.tag) && (
+                        <span className="inline-block px-3 py-1 text-[10px] font-bold uppercase tracking-widest text-blue-400 bg-blue-500/10 border border-blue-500/20 rounded-full w-fit">
+                            {item.category || item.tag}
+                        </span>
+                    )}
+                    {Array.isArray(item.tags) && item.tags.map((tag, idx) => (
+                        <span key={idx} className="inline-block px-2.5 py-0.5 text-[9px] font-mono font-medium text-slate-400 bg-white/5 border border-white/10 rounded-full">
+                            #{tag}
+                        </span>
+                    ))}
+                </div>
                 <h3 className="text-2xl font-black text-white mb-2 leading-tight">
                     {item.title}
                 </h3>
@@ -398,9 +432,9 @@ function DefaultFanCard({ item, active }) {
                     </p>
                 )}
 
-                {active && item.link && item.link !== "#" && (
+                {active && (item.link || item.href) && (item.link || item.href) !== "#" && (
                     <a
-                        href={item.link}
+                        href={item.link || item.href}
                         target="_blank"
                         rel="noreferrer"
                         onClick={(e) => e.stopPropagation()}

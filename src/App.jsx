@@ -74,6 +74,7 @@ function App() {
               <a href="#about" className="hover:text-blue-400 transition-colors">About</a>
               <a href="#education" className="hover:text-blue-400 transition-colors">Education</a>
               <a href="#projects" className="hover:text-blue-400 transition-colors">Work</a>
+              <a href="/Ndefo_Agozilim_CV.pdf" target="_blank" rel="noreferrer" className="hover:text-blue-400 transition-colors">Resume</a>
               <a href="#contact" className="px-5 py-2 rounded-full bg-white text-slate-950 hover:bg-blue-500 hover:text-white transition-all shadow-lg shadow-white/10">
                 Let's Talk
               </a>
@@ -94,6 +95,7 @@ function App() {
           <a href="#about" onClick={() => setIsMenuOpen(false)} className="hover:text-white transition-colors">About</a>
           <a href="#education" onClick={() => setIsMenuOpen(false)} className="hover:text-white transition-colors">Education</a>
           <a href="#projects" onClick={() => setIsMenuOpen(false)} className="hover:text-white transition-colors">Work</a>
+          <a href="/Ndefo_Agozilim_CV.pdf" target="_blank" rel="noreferrer" onClick={() => setIsMenuOpen(false)} className="hover:text-white transition-colors">Resume</a>
           <a href="#contact" onClick={() => setIsMenuOpen(false)} className="text-blue-500 hover:text-blue-400">Contact</a>
         </div>
       )}

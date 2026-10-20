@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { Send, CheckCircle, Mail, User, MessageSquare, Sparkles, Loader2 } from 'lucide-react';
+import { Send, CheckCircle, Mail, User, MessageSquare, Sparkles, Loader2, Linkedin, Twitter, Github } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 
 const ContactForm = () => {
@@ -98,7 +98,36 @@ const ContactForm = () => {
             <div className="p-8 rounded-[2rem] bg-white/[0.02] border border-white/5 hover:border-indigo-500/30 transition-colors group">
               <User className="text-indigo-500 mb-4 group-hover:scale-110 transition-transform" size={28} />
               <h3 className="text-xl font-bold text-white mb-1">Socials</h3>
-              <p className="text-slate-400 text-sm">Find me on LinkedIn & Twitter/X.</p>
+              <p className="text-slate-400 text-sm mb-4">Find me on LinkedIn & Twitter/X.</p>
+              <div className="flex flex-wrap gap-2">
+                <a
+                  href="https://www.linkedin.com/in/agozilim-ndefo-66690214b"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-blue-600/10 border border-blue-500/20 text-blue-400 hover:bg-blue-600 hover:text-white transition-all text-xs font-semibold"
+                >
+                  <Linkedin size={12} />
+                  LinkedIn
+                </a>
+                <a
+                  href="https://twitter.com/agozilim"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-600/10 border border-cyan-500/20 text-cyan-400 hover:bg-cyan-600 hover:text-white transition-all text-xs font-semibold"
+                >
+                  <Twitter size={12} />
+                  Twitter/X
+                </a>
+                <a
+                  href="https://github.com/millamzy"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-slate-300 hover:bg-white hover:text-slate-950 transition-all text-xs font-semibold"
+                >
+                  <Github size={12} />
+                  GitHub
+                </a>
+              </div>
             </div>
           </div>
 
